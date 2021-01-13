@@ -1,5 +1,6 @@
 package com.ra.fingerprints
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -28,35 +29,36 @@ class MainActivity : AppCompatActivity(), FingerprintCallback {
             //start authentication
             fingerprintAuth?.authenticate(object :FingerprintCallback{
                 override fun onSdkVersionNotSupported() {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    Toast.makeText(applicationContext, getString(R.string.fingerprint_error_sdk_not_supported), Toast.LENGTH_LONG).show()
                 }
 
                 override fun onBiometricAuthenticationNotSupported() {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    Toast.makeText(applicationContext, getString(R.string.fingerprint_error_hardware_not_supported), Toast.LENGTH_LONG).show()
                 }
 
                 override fun onBiometricAuthenticationNotAvailable() {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    Toast.makeText(applicationContext, getString(R.string.fingerprint_error_fingerprint_not_available), Toast.LENGTH_LONG).show()
                 }
 
                 override fun onBiometricAuthenticationPermissionNotGranted() {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    Toast.makeText(applicationContext, getString(R.string.fingerprint_error_permission_not_granted), Toast.LENGTH_LONG).show()
                 }
 
                 override fun onBiometricAuthenticationInternalError(error: String?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    Toast.makeText(applicationContext, error, Toast.LENGTH_LONG).show()
                 }
 
                 override fun onAuthenticationFailed() {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    Toast.makeText(applicationContext, getString(R.string.fingerprint_failure), Toast.LENGTH_LONG).show()
                 }
 
                 override fun onAuthenticationCancelled() {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    Toast.makeText(applicationContext, getString(R.string.fingerprint_cancelled), Toast.LENGTH_LONG).show()
+                    fingerprintAuth?.cancelAuthentication()
                 }
 
                 override fun onAuthenticationSuccessful() {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    Toast.makeText(applicationContext, getString(R.string.fingerprint_success), Toast.LENGTH_LONG).show()
                 }
 
                 override fun onAuthenticationHelp(helpCode: Int, helpString: CharSequence?) {
